@@ -9,7 +9,7 @@ async function getLestTenReasults() {
   console.log('2');
   
   const response = await fetch(
-    `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/search?query=AA&limit=10&exchange=NASDAQ`);
+    `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/search?query=${companySearch.value}&limit=10&exchange=NASDAQ`);
     
   stopLoader();
   getResponse(response)  
