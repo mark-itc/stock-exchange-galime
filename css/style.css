@@ -11,7 +11,7 @@ body {
   }
   .page_container {
     width: 95vh;
-    margin:100px 100px;
+    margin:50px 100px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -87,7 +87,7 @@ body {
   }
   
   img{
-    margin:20px  70px;
+    margin:20px  150px;
     width: 80px;
     height: 80px;
   }

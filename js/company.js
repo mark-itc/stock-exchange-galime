@@ -7,6 +7,7 @@ const stockPriceChange = document.getElementById("stockPriceChange");
 const companyDescription = document.getElementById("companyDescription");
 const companyLogo = document.getElementById("companyLogo");
 const spinner = document.getElementById("loading");
+const title = document.getElementById("title");
 const companyDataURL = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/${symbol}`
 const stockDataURL = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/historical-price-full/${symbol}?serietype=line`
 let numberOfCalls = 0;
@@ -15,7 +16,7 @@ addEventListener("load", controller());
 
 function controller() {
     numberOfCalls = 0;
-    fetchData(companyDataURL)
+    fetchData(companyDataURL);
 }
 
 async function fetchData(url) {
@@ -39,6 +40,7 @@ function addCompanyData(responseJson){
     if (changeInStock < 0) stockPriceChange.style.color    = "red"
 
     companyFullName.innerHTML = responseJson.profile.companyName;
+    title.innerHTML = responseJson.profile.companyName;
     companyIndustry.innerHTML =responseJson.profile.industry;
     stockPrice.innerHTML = "$" + responseJson.profile.price + "&nbsp";
     stockPriceChange.innerHTML = "(" + changeInStock + "%)";
