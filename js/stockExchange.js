@@ -1,8 +1,29 @@
 const datalist = document.getElementById("results");
 const spinner = document.getElementById("loading");
-addEventListener("load", marquee());
+const marquee = document.getElementById("marquee");
+addEventListener("load", getMarqueeData());
 document.getElementById("companySearch").addEventListener('input', getLestTenReasults);
 console.log('1');
+
+async function getMarqueeData(){
+  const response = await fetch (`https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/stock-screener?exchange=NASDAQ&limit=${50}`);
+  if (response.ok) {   
+    const responseJson = await response.json();
+    let listOfCompanyAndPrices = [];
+    let price =[];
+    for (let i = 0; i < 50; i++){
+      listOfCompanyAndPrices.push(responseJson[i].companyName);
+      listOfCompanyAndPrices.push(": $");  
+      listOfCompanyAndPrices.push(Number(responseJson[i].price).toFixed(2));  
+      listOfCompanyAndPrices.push(";   ");  
+  }
+  marquee.innerHTML = listOfCompanyAndPrices.join(" ");
+   }else {
+      const errorMessage = await response.text();
+      console.log(errorMessage);
+  }
+}
+
 
 async function getLestTenReasults() {
   startLoader();
@@ -61,18 +82,6 @@ async function appendResults(responseJson){
     datalist.appendChild(listItem);}
     }
 
-    async function marquee(){
-    const response = await fetch('https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/profile/aapl');
-    console.log("try1:", response);
-    if (response.ok) {   
-      const responseJson = await response.text();
-      console.log("try2:", responseJson);
-
-    } else {
-        const errorMessage = await response.text();
-        console.log(errorMessage);
-    }
-  }
     
 function startLoader() {
   spinner.classList.remove("d-none");

@@ -10,11 +10,10 @@ body {
     padding-bottom: 50px;
   }
   .page_container {
-    width: 90vh;
-    margin:30px 100px;
+    width: 95vh;
+    margin:100px 100px;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     flex-wrap: wrap;
   }
   
@@ -117,4 +116,16 @@ body {
     flex-wrap: wrap;
   }
   
+  .marquee {
+    position: absolute;
+    height: 5px;
+    white-space: nowrap;
+    top: 1px;
+    display: flex;
+    animation: move 32s linear infinite;
+  }
   
+  @keyframes move {
+    0% { transform: translateX(0); }
+    100% { transform: translatex(-1000px); }
+  }
