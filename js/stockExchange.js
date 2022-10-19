@@ -1,13 +1,15 @@
+const companySearch = document.getElementById("companySearch");
 const datalist = document.getElementById("results");
 const spinner = document.getElementById("loading");
 const resultlist = document.getElementById("show_result");
 const marquee = document.getElementById("marquee");
 const marqueeURL = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/stock-screener?exchange=NASDAQ&limit=${100}`
-const URLForNameAndSymbol = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/search?query=${companySearch.value}&limit=10&exchange=NASDAQ`;
+const URLForNameAndSymbol = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/search?query=`
+const QuaryURLForNameAndSymbol = `&limit=10&exchange=NASDAQ`;
 const URLForLogoAnsStockPrice = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/`
 
 addEventListener("load", getMarqueeData());
-document.getElementById("companySearch").addEventListener('input', getLestTenReasults);
+companySearch.addEventListener('input', getLestTenReasults);
 
 async function fetchData (url) {
   startLoader()
@@ -40,7 +42,7 @@ async function getMarqueeData(){
 
 
 async function getLestTenReasults() {
-  const companyResultResponse = await fetchData(URLForNameAndSymbol);
+  const companyResultResponse = await fetchData(URLForNameAndSymbol + companySearch.value + QuaryURLForNameAndSymbol);
 
   for (let i = 0; i < 10; i++) {
     let symbol = companyResultResponse[i].symbol;
