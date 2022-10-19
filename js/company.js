@@ -10,50 +10,44 @@ const spinner = document.getElementById("loading");
 const title = document.getElementById("title");
 const companyDataURL = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/${symbol}`
 const stockDataURL = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/historical-price-full/${symbol}?serietype=line`
-let numberOfCalls = 0;
 
-addEventListener("load", controller());
+addEventListener("load", addCompanyData());
 
-function controller() {
-    numberOfCalls = 0;
-    fetchData(companyDataURL);
-}
-
-async function fetchData(url) {
+async function fetchData (url) {
     startLoader()
     const response = await fetch(url);
     stopLoader()
     if (response.ok) {
-        const responseJson = await response.json();
-        if (numberOfCalls == 0)addCompanyData(responseJson);
-        else {
-            addStockChart(responseJson);
+        const responseJson = await response.json();      
+        return(responseJson);
         }
-    } else {
+     else {
         const errorMessage = await response.text();
-        console.log(errorMessage);
+        alert(errorMessage);
     }
-}
+  }
 
-function addCompanyData(responseJson){
+async function addCompanyData(){
+    const responseJson = await fetchData (companyDataURL);
+
     const changeInStock = Number(responseJson.profile.changesPercentage).toFixed(2)
     if (changeInStock < 0) stockPriceChange.style.color    = "red"
 
     companyFullName.innerHTML = responseJson.profile.companyName;
-    title.innerHTML = responseJson.profile.companyName;
+    title.innerHTML = responseJson.profile.companyName + " Information";
     companyIndustry.innerHTML =responseJson.profile.industry;
     stockPrice.innerHTML = "$" + responseJson.profile.price + "&nbsp";
     stockPriceChange.innerHTML = "(" + changeInStock + "%)";
     companyDescription.innerHTML = responseJson.profile.description;
     companyLogo.setAttribute("src", responseJson.profile.image);
-    numberOfCalls++;
-    fetchData(stockDataURL)
+    addStockChart()
 }
 
-function addStockChart(responseJson){
+async function addStockChart(){
+    const responseJson = await fetchData (stockDataURL);
+
     const labelsArr = [];
     const labelsPriceArr = [responseJson.historical[0].close];
-    console.log(responseJson.historical);
 
     for (let i = 0; i < responseJson.historical.length; i++) {
         labelsArr.push(responseJson.historical[i].date);
@@ -61,19 +55,20 @@ function addStockChart(responseJson){
     for (let i = 1; i < responseJson.historical.length; i++) {
         labelsPriceArr.push(responseJson.historical[i].close);
     }
+
     const data = {
-    labels: labelsArr,
-    datasets: [{
+        labels: labelsArr,
+        datasets: [{
         label: "Stock closing price",
         backgroundColor: "#30AA47",
         borderColor: "#30AA47",
         data: labelsPriceArr,
         },],};
         
-        const config = {
-         type: "line",
-         data: data,
-         options: {
+    const config = {
+        type: "line",
+        data: data,
+        options: {
             responsive: true,
             scales: {
                 y: {
@@ -88,10 +83,11 @@ function addStockChart(responseJson){
                     },  
                 },
             }
-         }
-        };
-        const myChart = new Chart(document.getElementById("myChart"), config);
         }
+    };
+        
+    const myChart = new Chart(document.getElementById("myChart"), config);
+}
 
 function startLoader() {
   spinner.classList.remove("d-none");
