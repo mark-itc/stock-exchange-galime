@@ -1,3 +1,4 @@
+import {fetchData} from "./utils.js"
 const urlParams = new URLSearchParams(location.search);
 const symbol = urlParams.get("symbol");
 const companyIndustry = document.getElementById("companyIndustry");
@@ -6,14 +7,13 @@ const stockPrice = document.getElementById("stockPrice");
 const stockPriceChange = document.getElementById("stockPriceChange");
 const companyDescription = document.getElementById("companyDescription");
 const companyLogo = document.getElementById("companyLogo");
-const spinner = document.getElementById("loading");
 const title = document.getElementById("title");
 const companyDataURL = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/${symbol}`
 const stockDataURL = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/historical-price-full/${symbol}?serietype=line`
 
 addEventListener("load", addCompanyData());
 
-async function fetchData (url) {
+/*async function fetchData (url) {
     startLoader()
     const response = await fetch(url);
     stopLoader()
@@ -25,7 +25,7 @@ async function fetchData (url) {
         const errorMessage = await response.text();
         alert(errorMessage);
     }
-  }
+  }*/
 
 async function addCompanyData(){
     const responseJson = await fetchData (companyDataURL);
@@ -87,12 +87,4 @@ async function addStockChart(){
     };
         
     const myChart = new Chart(document.getElementById("myChart"), config);
-}
-
-function startLoader() {
-  spinner.classList.remove("d-none");
-}
-
-function stopLoader() {
-  spinner.classList.add("d-none");
 }

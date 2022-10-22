@@ -15,22 +15,46 @@
   </head>
  
   <body>
-    <div class="page_container">
+    <!--<div class="page_container">
       <div id="marquee" class="marquee"></div>
       <h1>Nasdaq information for all</h1>
       <h2> find your next stock investment:</h2>
       <h4> Which company got your attention?</h4>
       <div class="search_container">
-        <input type="text" id="companySearch" placeholder="Company name">        
+        <input type="search" id="companySearch" placeholder="Company name">        
         <button type="button">Search</button>
         <div id="loading" class="spinner-border d-none" role="status"></div>
       </div>
+      <div id="form"></div>
       <div id="show_result">
       <ul id="results"></ul>
       </div>
-    </div>
-  
-    <script type="module" name ="stockExchange" src="./js/stockExchange.js"></script>
-    
+    </div>-->
+    <div class="page_container">
+      <div id="marquee" class="marquee"></div>
+      <h1>Nasdaq information for all</h1>
+      <h2> find your next stock investment:</h2>
+      <h4> Which company got your attention?</h4>
+      <div id="form"></div>
+      <div id="results"></div>
+      </div>
+    <script type="module" src="js\Marquee.js"></script>
+    <script type="module" src="js\SearchResult.js"></script>  
+    <script type="module" src="js\SearchForm.js"></script>
+    <script type="module">
+      import {Marquee} from "./js/Marquee.js";
+      import {SearchForm} from "./js/SearchForm.js";
+      import {SearchResults} from "./js/SearchResult.js";
+
+      (async function () {
+        const marquee = new Marquee(document.getElementById('marquee'));
+        await marquee.load();
+        const form = new SearchForm(document.getElementById('form'));
+        form.addFormToPage();
+        const result = new SearchResults(document.getElementById('results'));
+        result.renderReasults();
+       
+      })()
+    </script>  
   </body>
 </html>

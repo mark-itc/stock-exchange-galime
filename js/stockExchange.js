@@ -1,30 +1,14 @@
+import {fetchData} from "./utils.js"
+
+
 const companySearch = document.getElementById("companySearch");
 const datalist = document.getElementById("results");
-const spinner = document.getElementById("loading");
 const resultlist = document.getElementById("show_result");
-const marquee = document.getElementById("marquee");
-const marqueeURL = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/stock-screener?exchange=NASDAQ&limit=${100}`
-const URLForNameAndSymbol = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/search?query=`
-const QuaryURLForNameAndSymbol = `&limit=10&exchange=NASDAQ`;
-const URLForLogoAnsStockPrice = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/`
+const marqueeDiv = document.getElementById("marquee");
+
 
 addEventListener("load", getMarqueeData());
 companySearch.addEventListener('input', getLestTenReasults);
-
-async function fetchData (url) {
-  startLoader()
-  const response = await fetch(url);
-  stopLoader()
-  
-  if (response.ok) {
-    const responseJson = await response.json();      
-    return(responseJson);
-      }
-  else {
-    const errorMessage = await response.text();
-    alert(errorMessage);
-  }
-}
 
 async function getMarqueeData(){
   const stockPriceResponse =await fetchData(marqueeURL);
@@ -66,10 +50,4 @@ async function getLestTenReasults() {
     }
  
     
-function startLoader() {
-  spinner.classList.remove("d-none");
-}
 
-function stopLoader() {
-  spinner.classList.add("d-none");
-}
