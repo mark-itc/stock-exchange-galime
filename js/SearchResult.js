@@ -23,9 +23,15 @@ export class SearchResults {
           companyLogo.setAttribute("src", responseJsonFromCompanyData.profile.image);
         
           const listItem = document.createElement("li");
-          const Item = document.createTextNode(companyResultResponse[i].name + " (" + companyResultResponse[i].symbol + ") ("+ Number(responseJsonFromCompanyData.profile.changesPercentage).toFixed(2)+")");
-          
-        
+          let searched = document.getElementById("companySearch").value.trim();
+          let text = companyResultResponse[i].name;
+          let re = new RegExp(searched,"g");
+          let newText = text.replace(re, '<mark>${searched}</mark>');
+          text = newText;
+          const Item = document.createTextNode(text + " (" + companyResultResponse[i].symbol + ") ("+ Number(responseJsonFromCompanyData.profile.changesPercentage).toFixed(2)+")");
+
+
+
           const listUrl = document.createElement("a");
           listUrl.setAttribute('target', '_blank');
           listUrl.href = `/company.html?symbol=${companyResultResponse[i].symbol}`;
