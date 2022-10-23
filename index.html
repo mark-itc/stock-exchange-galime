@@ -52,7 +52,10 @@
         const form = new SearchForm(document.getElementById('form'));
         form.addFormToPage();
         const result = new SearchResults(document.getElementById('results'));
-        result.renderReasults();
+
+        form.registerButtonOnClick(() => {result.renderResults()});
+       
+        //result.renderResults();
        
       })()
     </script>  

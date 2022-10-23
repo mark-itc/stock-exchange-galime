@@ -8,11 +8,13 @@ export class SearchResults {
         this.companies = companies;
     }
 
-    async renderReasults() {
+    async renderResults() {
+        this.companies.innerHTML = "";
         const companyResultResponse = await fetchData(URLForNameAndSymbol + document.getElementById('companySearch').value + QuaryURLForNameAndSymbol);
         const unOrderedList = document.createElement("ul");
+        const numOfResluts = Math.min(companyResultResponse.length, 10);
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < numOfResluts; i++) {
           let symbol = companyResultResponse[i].symbol;
           const responseJsonFromCompanyData = await fetchData(`https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/${symbol}`);
         
@@ -22,6 +24,7 @@ export class SearchResults {
         
           const listItem = document.createElement("li");
           const Item = document.createTextNode(companyResultResponse[i].name + " (" + companyResultResponse[i].symbol + ") ("+ Number(responseJsonFromCompanyData.profile.changesPercentage).toFixed(2)+")");
+          
         
           const listUrl = document.createElement("a");
           listUrl.setAttribute('target', '_blank');

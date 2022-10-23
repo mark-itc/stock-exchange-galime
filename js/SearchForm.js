@@ -4,14 +4,14 @@ export class SearchForm {
         this.companies = companies;
     }
     
+    registerButtonOnClick(func) {
+        const button = document.getElementById('searchButton');
+        button.onclick = func;
+    }
+
     addFormToPage (){
         console.log('1');     
         
-        let pageContainer = "<div class='page_container'>"; 
-        let endPageContainer = "</div>"; 
-        document.body.prepend(pageContainer)
-        document.body.append(endPageContainer) 
-
         const searchContainer = document.createElement("div");
         searchContainer.className = "search_container";
 
@@ -22,6 +22,7 @@ export class SearchForm {
 
         const button = document.createElement("button");
         button.type = "button";
+        button.id = "searchButton";
         const buttonText = document.createTextNode("Search");
         button.appendChild(buttonText);
 
