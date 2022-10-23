@@ -25,8 +25,8 @@ export class SearchResults {
           const listItem = document.createElement("li");
           let searched = document.getElementById("companySearch").value.trim();
           let text = companyResultResponse[i].name;
-          let re = new RegExp(searched,"g");
-          let newText = text.replace(re, '<mark>' + searched + '</mark>');
+          let re = new RegExp("(" + searched + ")","ig");
+          let newText = text.replace(re, `<mark>$1</mark>`);
           text = newText;
           const Item = document.createTextNode(text + " (" + companyResultResponse[i].symbol + ") ("+ Number(responseJsonFromCompanyData.profile.changesPercentage).toFixed(2)+")");
 
@@ -36,7 +36,8 @@ export class SearchResults {
           listUrl.setAttribute('target', '_blank');
           listUrl.href = `/company.html?symbol=${companyResultResponse[i].symbol}`;
         
-          listUrl.appendChild(Item);
+          listUrl.innerHTML = Item.wholeText;
+          //listUrl.appendChild(Item);
           listItem.appendChild(companyLogo);
           listItem.appendChild(listUrl);
           unOrderedList.appendChild(listItem);
