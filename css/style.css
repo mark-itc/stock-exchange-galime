@@ -1,0 +1,134 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: rgb(255, 254, 253);
+    padding: none;
+    margin: none;
+    color:#32B04A;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  h1 {
+    color: #498A92;
+    padding-bottom: 50px;
+  }
+  .page_container {
+    width: 100vh;
+    margin:70px 150px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  
+  .search_container {
+    display: flex;
+    margin-top: 40px;
+  }
+  
+  input {
+    padding-left: 20px;
+    width: 60vh;
+    height: 40px;
+    padding-bottom: none;
+    margin-bottom: none;
+    border:1px solid #F3C141;
+    border-radius: 4%;
+  }
+  
+  button {
+   width: 70px;
+   height: 40px;
+    margin-left: 30px;
+    background-color:#E85628;
+    color:#F4F5F0 ;
+    font-size: smaller;
+    border: 1px solid#b64421;
+    border-radius: 50%;
+  }
+  
+  ul {
+    padding-top: none;
+    margin-top: none;
+    width: 60vh;
+    background-color: #E0E0C7;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    list-style-type: none;
+  }
+  li {
+    padding: 5px;
+  }
+  a{
+  color:#3B5153;
+  }
+  
+  a:link {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: azure;
+    background-color:rgb(70, 112, 35);
+  }
+  canvas {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .price_container {
+    display: flex;
+    margin: 20px 0;
+  }
+  .name_and_logo_container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    }
+
+  .name_container {
+    color:#E85628;
+    margin-top: 10px;
+  }
+
+  img{
+    margin:20px  110px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .small_img{
+    margin:5px  5px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .show_result{
+    text-align: justify;
+    text-justify: inter-word;
+    width: 90vh;
+    color: #E85628;
+  }
+  
+  p {
+    color:  #498A92;
+    text-indent: 30px;
+    font-size: small;
+  }
+  
+  .chart_container{
+    margin:10px 60px;
+    width: 80%;
+    flex-wrap: wrap;
+  }
+  
+  .marquee {
+    position: absolute;
+    height: 5px;
+    white-space: nowrap;
+    top: 1px;
+    display: flex;
+    animation: move 32s linear infinite;
+  }
+  
+  @keyframes move {
+    0% { transform: translateX(0); }
+    100% { transform: translatex(-1000px); }
+  }
